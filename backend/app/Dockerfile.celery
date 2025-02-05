@@ -1,0 +1,19 @@
+# Use Python 3.9 as the base image
+FROM python:3.9
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entire backend source code
+COPY . .
+
+# Set environment variables for Celery
+ENV CELERY_BROKER_URL=redis://redis:6379/0
+ENV CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+# Start Celery worker
+CMD ["celery", "-A", "tasks", "worker", "--loglevel=info"]
