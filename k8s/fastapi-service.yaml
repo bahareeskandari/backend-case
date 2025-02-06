@@ -3,7 +3,11 @@ kind: Service
 metadata:
   name: fastapi
 spec:
-  ports:
-    - port: 8000
   selector:
     app: fastapi
+  type: ClusterIP # Change from ClusterIP to NodePort
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30002 # Pick a stable NodePort

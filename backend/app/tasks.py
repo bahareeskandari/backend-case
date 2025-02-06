@@ -7,22 +7,25 @@ celery_app = Celery("tasks", broker="redis://redis:6379/0", backend="redis://red
 
 # celery handles where the tasks should be sent to the workers
 # celery handles distrubition of work between multiple workers for us
-@celery_app.task
-def cpu_intensive_task(n: int):
-    """Simulate a CPU-intensive task"""
-    matrix = np.random.rand(n, n)
-    result = np.linalg.matrix_power(matrix, 5)
-    return f"Completed CPU-intensive task with size {n}x{n}"
 
 
+    # old verison that works, 
+# @celery_app.task
+# def cpu_intensive_task(n: int):
+#     """Simulate a CPU-intensive task"""
+#     matrix = np.random.rand(n, n)
+#     result = np.linalg.matrix_power(matrix, 5)
+#     return f"Completed CPU-intensive task with size {n}x{n}"
 
+
+    # testa nya versionen 
 @celery_app.task
 def cpu_intensive_task(n: int):
     """A CPU-intensive task that runs long enough to trigger autoscaling"""
 
     start_time = time.time()
     
-    while time.time() - start_time < 200:  # Run for at least 60 seconds
+    while time.time() - start_time < 30:  # Run for at least 30 seconds
         matrix = np.random.rand(1000, 1000)
         _ = np.linalg.det(matrix)  # Heavy CPU operation
 

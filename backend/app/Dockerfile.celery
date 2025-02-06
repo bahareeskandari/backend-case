@@ -5,11 +5,11 @@ FROM python:3.9
 WORKDIR /app
 
 # Copy the requirements file and install dependencies
-COPY requirements.txt .
+COPY backend/app/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire backend source code
-COPY . .
+COPY backend/app ./
 
 # Set environment variables for Celery
 ENV CELERY_BROKER_URL=redis://redis:6379/0

@@ -15,4 +15,17 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 20
+          averageUtilization: 50
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 10 # Scale up decisions happen quickly
+      policies:
+        - type: Percent
+          value: 50 # Increase pods by 50% at a time
+          periodSeconds: 15 # Every 15 seconds, evaluate scaling
+    scaleDown:
+      stabilizationWindowSeconds: 30 # Prevent immediate scale-down after load disappears
+      policies:
+        - type: Percent
+          value: 20 # Reduce pods by 20% at a time
+          periodSeconds: 15 # Evaluate every 15 seconds
