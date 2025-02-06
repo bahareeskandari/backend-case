@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: fastapi
-  type: ClusterIP # Change from ClusterIP to NodePort
+  type: NodePort # Change from ClusterIP to NodePort
   ports:
     - protocol: TCP
       port: 8000

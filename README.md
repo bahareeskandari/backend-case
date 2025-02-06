@@ -50,4 +50,10 @@ minikube service frontend-service --url
 minikube service fastapi --url
 ```
 
+To continuously monitor HPA changes:
+
+```sh
+kubectl get hpa -w
+```
+
 Copy and paste these into your browser to access the **frontend** and **API**.
