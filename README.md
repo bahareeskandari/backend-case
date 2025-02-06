@@ -23,7 +23,7 @@ Before running, ensure you have installed:
 ### 1⃣ **Clone the Repository**
 
 ```sh
-git clone <your-repo-url>
+git clone https://github.com/bahareeskandari/backend-case.git
 cd BACKEND-CASE
 ```
 
